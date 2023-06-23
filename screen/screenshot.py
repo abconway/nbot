@@ -47,3 +47,7 @@ def get_screenshot() -> Image:
     win32gui.ReleaseDC(window_handle, window_handle_dc)
 
     return im
+
+
+if __name__ == '__main__':
+    get_screenshot().save('test.png')

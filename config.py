@@ -17,6 +17,11 @@ config = {
                 'height': 28,
                 'global_offset': (-556, 286),
             },
+            'command_word': {
+                'width': 96,
+                'height': 14,
+                'global_offset': (-402, 282),
+            },
             'numbers': {
                 'width': 14,
                 'height': 14,

@@ -38,3 +38,32 @@ def get_number_arrays():
         array_8,
         array_9,
     )
+
+
+NUM_0, NUM_1, NUM_2, NUM_3, NUM_4, NUM_5, NUM_6, NUM_7, NUM_8, NUM_9 = get_number_arrays()
+
+
+def get_number(im: Image):
+    num_array = np.asarray(im)
+    if np.array_equal(num_array, NUM_0):
+        return 0
+    elif np.array_equal(num_array, NUM_1):
+        return 1
+    elif np.array_equal(num_array, NUM_2):
+        return 2
+    elif np.array_equal(num_array, NUM_3):
+        return 3
+    elif np.array_equal(num_array, NUM_4):
+        return 4
+    elif np.array_equal(num_array, NUM_5):
+        return 5
+    elif np.array_equal(num_array, NUM_6):
+        return 6
+    elif np.array_equal(num_array, NUM_7):
+        return 7
+    elif np.array_equal(num_array, NUM_8):
+        return 8
+    elif np.array_equal(num_array, NUM_9):
+        return 9
+    else:
+        return 0
