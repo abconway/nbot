@@ -1,5 +1,4 @@
 from time import sleep
-import sys
 
 import numpy as np
 from PIL import Image
@@ -16,6 +15,7 @@ from screen.get_logout_button import get_logout_button
 from screen.get_party_icon import get_party_icon
 from ui.attack import attack
 from ui.chat import chat
+from ui.exigate import exigate
 from ui.get_dialogs import get_dialogs
 from ui.move import move, UP, DOWN, LEFT, RIGHT
 from ui.vitality import vitality
@@ -107,22 +107,23 @@ def main():
         print("HP: {}, MP: {}".format(hp3, mp3))
         
         if in_battle and ready_for_command:
-            sys.stdout.flush()
             for handle in handles:
                 dlg = dialogs[handle]
                 attack(dlg)
             for handle in handles:
                 vitality_status[handle] = False
+        elif not in_battle and out_of_battle and ((mp1 < 33) or (mp2 < 133) or (mp3 < 133)):
+            print("Exigate!!!!!!")
+            exigate(leader_dlg)
+            break
         elif not in_battle and out_of_battle and ((hp1 < 183) or (hp2 < 183) or (hp3 < 183)) and not all(vitality_status.values()):
             print("Vitality!!!!!!")
-            sys.stdout.flush()
             for handle in handles:
                 if not vitality_status[handle]:
                     dlg = dialogs[handle]
                     vitality(dlg)
                     vitality_status[handle] = True
         elif not in_battle:
-            sys.stdout.flush()
             leader_dlg.set_focus()
             sleep(0.1)
             if move_left:
@@ -131,8 +132,6 @@ def main():
             else:
                 move(leader_dlg, RIGHT)
                 move_left = True
-        else:
-            sys.stdout.flush()
 
 
 if __name__ == '__main__':
