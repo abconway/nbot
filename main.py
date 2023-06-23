@@ -9,6 +9,7 @@ from assets.icons import get_icon_arrays
 from font.numbers import get_number_arrays
 from font.words import get_word_arrays
 from screen.screenshot import get_screenshot
+from screen.find_logout_button import find_logout_button
 from screen.get_status import get_status_images
 from screen.get_command_word import get_command_word
 from screen.get_battle_icon import get_battle_icon
@@ -128,44 +129,48 @@ def main():
     p2_vitality_cast = False
     p3_vitality_cast = False
     gui_focus_player(1)
+    ref_loc = find_logout_button(get_screenshot())
     while True:
         screenshot = get_screenshot()
-        command_image = get_command_word(screenshot, resolution='957x487')
-        battle_image = get_battle_icon(screenshot, resolution='957x487')
+        battle_image = get_battle_icon(screenshot, ref_loc)
         in_battle = check_in_battle(battle_image)
         print("In battle: {}".format(in_battle))
-        ready_for_command = check_if_ready_for_command(command_image)
-        print("Ready for command: {}".format(ready_for_command))
-        status_images = get_status_images(screenshot, resolution='957x487', in_battle=in_battle)
+        # command_image = get_command_word(screenshot, resolution='957x487')
+        # ready_for_command = check_if_ready_for_command(command_image)
+        # print("Ready for command: {}".format(ready_for_command))
+        status_images = get_status_images(screenshot, ref_loc, in_battle)
         hp1, mp1 = get_status(*status_images[:6])
+        print("HP: {}, MP: {}".format(hp1, mp1))
         hp2, mp2 = get_status(*status_images[6:12])
+        print("HP: {}, MP: {}".format(hp2, mp2))
         hp3, mp3 = get_status(*status_images[12:])
-        direction = choice(DIRECTIONS)
-        if not in_battle:
-            if hp1 < 183 and p1_vitality_cast is False:
-                gui_focus_player(1)
-                gui_vitality()
-                p1_vitality_cast = True
-            elif hp2 < 183 and p2_vitality_cast is False:
-                gui_focus_player(2)
-                gui_vitality()
-                p2_vitality_cast = True
-            elif hp3 < 183 and p3_vitality_cast is False:
-                gui_focus_player(3)
-                gui_vitality()
-                p3_vitality_cast = True
-            gui_focus_player(1)
-            gui_move(direction)
-        elif in_battle and ready_for_command:
-            p1_vitality_cast = False
-            p2_vitality_cast = False
-            p3_vitality_cast = False
-            gui_focus_player(1)
-            gui_attack()
-            gui_focus_player(2)
-            gui_attack()
-            gui_focus_player(3)
-            gui_attack()
+        print("HP: {}, MP: {}".format(hp3, mp3))
+        # direction = choice(DIRECTIONS)
+        # if not in_battle:
+        #     if hp1 < 183 and p1_vitality_cast is False:
+        #         gui_focus_player(1)
+        #         gui_vitality()
+        #         p1_vitality_cast = True
+        #     elif hp2 < 183 and p2_vitality_cast is False:
+        #         gui_focus_player(2)
+        #         gui_vitality()
+        #         p2_vitality_cast = True
+        #     elif hp3 < 183 and p3_vitality_cast is False:
+        #         gui_focus_player(3)
+        #         gui_vitality()
+        #         p3_vitality_cast = True
+        #     gui_focus_player(1)
+        #     gui_move(direction)
+        # elif in_battle and ready_for_command:
+        #     p1_vitality_cast = False
+        #     p2_vitality_cast = False
+        #     p3_vitality_cast = False
+        #     gui_focus_player(1)
+        #     gui_attack()
+        #     gui_focus_player(2)
+        #     gui_attack()
+        #     gui_focus_player(3)
+        #     gui_attack()
 
 
 if __name__ == '__main__':
