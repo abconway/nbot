@@ -92,14 +92,14 @@ def main():
         print("HP: {}, MP: {}".format(hp2, mp2))
         hp3, mp3 = get_status(*status_images[12:])
         print("HP: {}, MP: {}".format(hp3, mp3))
-        if not in_battle and ((hp1 < 183) or (hp2 < 183) or (hp3 < 183)):
+        
+        if not in_battle and ((hp1 < 183) or (hp2 < 183) or (hp3 < 183)) and not all(vitality_status.values()):
             for handle in handles:
                 if not vitality_status[handle]:
                     dlg = dialogs[handle]
                     vitality(dlg)
                     vitality_status[handle] = True
-        
-        if not in_battle:
+        elif not in_battle:
             leader_dlg.set_focus()
             sleep(0.1)
             if move_left:
@@ -114,6 +114,7 @@ def main():
                 attack(dlg)
             for handle in handles:
                 vitality_status[handle] = False
+
 
 
 if __name__ == '__main__':
