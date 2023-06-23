@@ -8,4 +8,4 @@ def attack(dlg):
     sleep(0.3)
     pywinauto.keyboard.send_keys('{4 down}' '{4 up}')
     sleep(0.3)
-    pywinauto.keyboard.send_keys('{4 down}' '{4 up}')
+    pywinauto.keyboard.send_keys('{1 down}' '{1 up}')

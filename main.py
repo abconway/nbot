@@ -3,7 +3,6 @@ from time import sleep
 import numpy as np
 from PIL import Image
 
-
 from assets.icons import get_icon_arrays
 from font.numbers import get_number
 from font.words import get_word_arrays
@@ -17,6 +16,7 @@ from ui.attack import attack
 from ui.chat import chat
 from ui.get_dialogs import get_dialogs
 from ui.move import move, UP, DOWN, LEFT, RIGHT
+from ui.vitality import vitality
 
 
 ICON_SWORD, ICON_SWORD_ACTIVE, ICON_PARTY = get_icon_arrays()
@@ -71,6 +71,9 @@ def main():
     leader_dlg = dialogs[leader_handle]
     chat(leader_dlg, 'I am the party leader!', channel='h')
     move_left = True
+    vitality_status = {}
+    for handle in handles:
+        vitality_status[handle] = False
     while True:
         screenshot = get_screenshot(leader_handle)
         
@@ -89,6 +92,12 @@ def main():
         print("HP: {}, MP: {}".format(hp2, mp2))
         hp3, mp3 = get_status(*status_images[12:])
         print("HP: {}, MP: {}".format(hp3, mp3))
+        if not in_battle and ((hp1 < 183) or (hp2 < 183) or (hp3 < 183)):
+            for handle in handles:
+                if not vitality_status[handle]:
+                    dlg = dialogs[handle]
+                    vitality(dlg)
+                    vitality_status[handle] = True
         
         if not in_battle:
             leader_dlg.set_focus()
@@ -103,6 +112,8 @@ def main():
             for handle in handles:
                 dlg = dialogs[handle]
                 attack(dlg)
+            for handle in handles:
+                vitality_status[handle] = False
 
 
 if __name__ == '__main__':
