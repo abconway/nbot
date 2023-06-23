@@ -5,8 +5,9 @@ import win32gui
 import win32ui
 
 
-def get_screenshot() -> Image:
-    window_handle = win32gui.FindWindow(None, 'NEStalgia | The Time Lords')
+def get_screenshot(window_handle=None) -> Image:
+    if not window_handle:
+        window_handle = win32gui.FindWindow(None, 'NEStalgia | The Time Lords')
     windll.user32.SetProcessDPIAware()
     left, top, right, bottom = win32gui.GetClientRect(window_handle)
     width = right - left

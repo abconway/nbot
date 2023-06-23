@@ -1,4 +1,6 @@
-import pyautogui as gui
+from time import sleep
+
+import pywinauto
 
 
 UP = 'up'
@@ -13,7 +15,12 @@ KEY_S = 's'
 KEY_D = 'd'
 
 
-def move(direction):
+pywinauto.keyboard.send_keys('{a down}' '{a up}')
+
+
+def move(dlg, direction):
+    dlg.set_focus()
+    sleep(0.1)
     if direction == UP:
         key = KEY_W
     elif direction == DOWN:
@@ -24,5 +31,4 @@ def move(direction):
         key = KEY_D
     else:
         raise Exception('Invalid direction')
-    gui.keyDown(key)
-    gui.keyUp(key)
+    pywinauto.keyboard.send_keys(f'{{{key} down}}' f'{{{key} up}}')

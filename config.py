@@ -26,6 +26,11 @@ config = {
                 'width': 14,
                 'height': 14,
             },
+            'party_icon': {
+                'width': 32,
+                'height': 32,
+                'global_offset': (-186, 430),
+            },
             'status': {
                 'hp1_offset': (0, 0),
                 'hp2_offset': (14, 0),
