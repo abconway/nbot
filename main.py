@@ -1,9 +1,7 @@
-from random import choice
 from time import sleep
 
 import numpy as np
 from PIL import Image
-import pywinauto
 
 
 from assets.icons import get_icon_arrays
@@ -75,12 +73,15 @@ def main():
     move_left = True
     while True:
         screenshot = get_screenshot(leader_handle)
+        
         battle_image = get_battle_icon(screenshot, ref_locs[leader_handle])
         in_battle = check_in_battle(battle_image)
         print("In battle: {}".format(in_battle))
+        
         command_image = get_command_word(screenshot, ref_locs[leader_handle])
         ready_for_command = check_if_ready_for_command(command_image)
         print("Ready for command: {}".format(ready_for_command))
+        
         status_images = get_status_images(screenshot, ref_locs[leader_handle], in_battle)
         hp1, mp1 = get_status(*status_images[:6])
         print("HP: {}, MP: {}".format(hp1, mp1))
@@ -88,7 +89,7 @@ def main():
         print("HP: {}, MP: {}".format(hp2, mp2))
         hp3, mp3 = get_status(*status_images[12:])
         print("HP: {}, MP: {}".format(hp3, mp3))
-        # direction = choice(DIRECTIONS)
+        
         if not in_battle:
             leader_dlg.set_focus()
             sleep(0.1)
