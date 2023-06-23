@@ -22,6 +22,10 @@ config = {
                 'height': 14,
                 'global_offset': (-402, 282),
             },
+            'logout_button': {
+                'width': 32,
+                'height': 22,
+            },
             'numbers': {
                 'width': 14,
                 'height': 14,
