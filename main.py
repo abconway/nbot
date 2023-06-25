@@ -112,7 +112,7 @@ def main():
                 attack(dlg)
             for handle in handles:
                 vitality_status[handle] = False
-        elif not in_battle and out_of_battle and ((mp1 < 33) or (mp2 < 133) or (mp3 < 133)):
+        elif not in_battle and out_of_battle and ((mp1 < 33) or (mp2 < 33) or (mp3 < 33)):
             print("Exigate!!!!!!")
             exigate(leader_dlg)
             break
