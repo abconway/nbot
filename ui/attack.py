@@ -1,11 +1,7 @@
-from time import sleep
-
-import pywinauto
+from ui.press_key import press_key
 
 
 def attack(dlg):
     dlg.set_focus()
-    sleep(0.3)
-    pywinauto.keyboard.send_keys('{4 down}' '{4 up}')
-    sleep(0.3)
-    pywinauto.keyboard.send_keys('{1 down}' '{1 up}')
+    press_key(dlg, '3')
+    press_key(dlg, '1')
