@@ -1,10 +1,9 @@
 from time import sleep
 
-import pywinauto
+from ui.press_key import press_key
 
 
 def vitality(dlg):
     dlg.set_focus()
-    sleep(0.3)
-    pywinauto.keyboard.send_keys('{3 down}' '{3 up}')
+    press_key(dlg, '3')
     sleep(4)
